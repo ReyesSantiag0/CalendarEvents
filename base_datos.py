@@ -15,7 +15,6 @@ def registrar_usuario(nombre_usuario, correo_usuario, contrasena_usuario):
       conex.commit()
       conex.close()
 
-
 def obtener_usuario(correo_usuario):
   conex = conexion()
   usuario = None
@@ -36,7 +35,7 @@ def listar_eventos(id_usuario):
   conex = conexion()
   eventos = []
   with conex.cursor() as cursor:
-    cursor.execute("SELECT id_evento, nombre_evento, fecha_evento, lugar_evento, modalidad_evento FROM eventos WHERE id_usuario = %s",(id_usuario))
+    cursor.execute("SELECT id_evento, nombre_evento, fecha_evento, lugar_evento, modalidad_evento FROM eventos WHERE id_usuario = %s ORDER BY fecha_evento ASC",(id_usuario))
     eventos = cursor.fetchall()
     conex.close()
     return eventos

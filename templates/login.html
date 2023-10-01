@@ -1,0 +1,51 @@
+{% extends './base_login.html' %}
+{% block titulo %}
+Login
+{% endblock %}
+
+{% block contenido %}
+
+
+<section>
+  <div class="container py-5">
+    <form action="{{url_for('login')}}" method="post">
+      <svg xmlns="http://www.w3.org/2000/svg" width="72" height="57" fill="currentColor" class="bi bi-calendar3"
+        viewBox="0 0 16 16">
+        <path
+          d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+        <path
+          d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+      </svg>
+
+      <h1 class="h3 mb-3 fw-normal">Por favor inicie sesión</h1>
+
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingInput" id="correo_usuario" name="correo_usuario"
+          placeholder="Correo Usuario">
+        <label for="floatingInput">Correo electrónico</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" id="contrasena_usuario"
+          name="contrasena_usuario" placeholder="Contraseña">
+        <label for="floatingPassword">Contraseña</label>
+      </div>
+      <button class="btn btn-primary w-100 py-2" type="submit">Iniciar sesión</button>
+      <div class="my-3 text-center">
+        <p>¿No tienes cuenta? <a href="{{url_for('registro_usuario')}}">Registrate
+            aquí</a></p>
+      </div>
+    </form>
+  </div>
+
+
+  {% with mensajes_flash = get_flashed_messages() %}
+
+  {% if mensajes_flash %}
+  {% for mensaje in mensajes_flash %}
+  <li>{{mensaje}}</li>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+</section>
+
+{% endblock %}

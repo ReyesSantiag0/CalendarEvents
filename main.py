@@ -1,22 +1,25 @@
 from flask import Flask, redirect, request, url_for, render_template, flash, session
 from werkzeug.security import check_password_hash as checkph
 from werkzeug.security import generate_password_hash as genph
+import secrets
 import base_datos
 
 app = Flask(__name__)
-app.secret_key = 'miclavesecreta'
+
+secret_key = secrets.token_hex(24)
+app.secret_key = secret_key
 
 # @app.before_request
 # def antes_de_acceso():
 #   ruta = request.path
-#   if not 'usuario' in session and ruta != '/entrar' and ruta != '/login' and ruta != '/salir' and ruta != '/registro' and ruta != "/registrar":
+#   if not 'usuario' in session and ruta != '/inicio_sesion' and ruta != '/login' and ruta != '/salir' and ruta != '/registro_usuario' and ruta != "/registrar":
 #     flash('Inicia sesión para continuar')
-#     return redirect('/entrar')
+#     return redirect('/inicio_sesion')
   
 @app.route('/')
-@app.route('/entrar')
-def entrar():
-  return render_template('entrar.html')
+@app.route('/inicio_sesion')
+def inicio_sesion():
+  return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -32,22 +35,21 @@ def login():
       return redirect('/eventos')
     else:
       flash('Acceso denegado')
-      return redirect('/entrar')
-  return redirect('/entrar')
+      return redirect('/inicio_sesion')
+  return redirect('/inicio_sesion')
         
 @app.route('/salir')
 def salir():
   session.pop('usuario', None)
   flash('Sesión cerrada')
-  return redirect('/entrar')
+  return redirect('/inicio_sesion')
 
+@app.route('/registro_usuario')
+def registro_usuario():
+  return render_template('registro_usuario.html')
 
-@app.route('/registro')
-def registro():
-  return render_template('registro.html')
-
-@app.route('/registrar', methods=['POST'])
-def registrar():
+@app.route('/registrar_usuario', methods=['POST'])
+def registrar_usuario():
     nombre_usuario = request.form['nombre_usuario']
     correo_usuario = request.form['correo_usuario']
     contrasena_usuario = request.form['contrasena_usuario']
@@ -58,8 +60,7 @@ def registrar():
     except Exception as e:
       flash('Error al registrar usuario')
     finally:
-      return redirect('/entrar')
-
+      return redirect('/inicio_sesion')
 
 @app.route('/agregar_evento')
 def agregar_evento():
@@ -77,7 +78,6 @@ def guardar_evento():
   base_datos.insertar_evento(nombre_evento, fecha_evento, lugar_evento, modalidad_evento,id_usuario)
   return redirect('/eventos')
 
-
 @app.route('/eventos')
 def eventos():
   correo_usuario = session['usuario']
@@ -86,18 +86,15 @@ def eventos():
   eventos = base_datos.listar_eventos(id_usuario)
   return render_template('eventos.html', eventos=eventos)
 
-
 @app.route('/eliminar_evento', methods=['POST'])
 def eliminar_evento():
   base_datos.eliminar_evento(request.form['id_evento'])
   return redirect('/eventos')
 
-
 @app.route('/editar_evento/<int:id_evento>')
 def editar_evento(id_evento):
   evento = base_datos.obtener_evento(id_evento)
   return render_template('editar_evento.html', evento=evento)
-
 
 @app.route('/actualizar_evento', methods=['POST'])
 def actualizar_evento():
@@ -111,7 +108,6 @@ def actualizar_evento():
   id_usuario = usuario[0]
   base_datos.actualizar_evento(id_evento, nombre_evento, fecha_evento, lugar_evento, modalidad_evento, id_usuario)
   return redirect('/eventos')
-
 
 if __name__ == '__main__':
   app.run(debug=True)
