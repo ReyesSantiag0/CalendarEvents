@@ -1,0 +1,75 @@
+{% extends './base.html' %}
+
+{% block titulo %}
+Editar Articulo
+{% endblock %}
+
+{% block contenido %}
+
+<section>
+  <div class="container py-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
+      <div class="col">
+        <div class="card shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+            role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+              dy=".3em">Thumbnail</text>
+          </svg>
+          <div class="card-body">
+            <h5 class="card-title">{{evento[1]}} / {{evento[2]}}</h5>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="form-group">
+                <form action="{{url_for('actualizar_evento')}}" method="post">
+                  <input type="hidden" name="id_evento" value="{{evento[0]}}">
+                  <div class="row g-3">
+                    <div class="col-sm-6">
+                      <label for="nombre_evento" class="form-label">Nombre Evento</label>
+                      <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" placeholder=""
+                        value="{{evento[1]}}" required>
+                      <div class="invalid-feedback">
+                        Se requiere un nombre válido.
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="fecha_evento" class="form-label">Fecha Evento</label>
+                      <input type="date" class="form-control" id="fecha_evento" name="fecha_evento" placeholder=""
+                        value="{{evento[2]}}" required>
+                      <div class="invalid-feedback">
+                        Se requiere un nombre válido.
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="lugar_evento" class="form-label">Lugar Evento</label>
+                      <input type="text" class="form-control" id="lugar_evento" name="lugar_evento" placeholder=""
+                        value="{{evento[3]}}" required>
+                      <div class="invalid-feedback">
+                        Se requiere un nombre válido.
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="modalidad_evento" class="form-label">Modalidad Evento</label>
+                      <select class="form-select" id="modalidad_evento" name="modalidad_evento" required>
+                        <option value="Virtual">Virtual</option>
+                        <option value="Presencial">Presencial</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Por favor seleccione una modalidad.
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="my-4">
+                  <button class="w-100 btn btn-success btn-lg" type="submit">Actualizar</button>
+                  <p class="card-text"><small class="text-body-secondary">El evento se actualizará con los datos más
+                      reciente*</small></p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

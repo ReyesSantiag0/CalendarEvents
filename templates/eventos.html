@@ -1,0 +1,104 @@
+{% extends './base.html' %}
+
+{% block titulo %}
+Mis Eventos
+{% endblock %}
+
+{% block contenido %}
+<section>
+  <div class="album py-3 bg-body-tertiary">
+    <div class="container">
+      <div class="m-2">
+        <a class="btn btn-sm btn-success" style="border-radius: 50px;" type="submit" data-bs-toggle="modal"
+          data-bs-target="#registrarEvento">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+          </svg>
+          <i class="fas fa-plus"></i>Añadir Evento</a>
+      </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for evento in eventos %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+              role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                dy=".3em">Thumbnail</text>
+            </svg>
+            <div class="card-body">
+              <h5 class="card-title">{{evento[1]}} / {{evento[2]}}</h5>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a type="submit" class="btn btn-sm btn-outline-primary m-1"
+                    href="{{url_for('editar_evento', id_evento=evento[0])}}">Editar</a>
+                  <form action="{{url_for('eliminar_evento', id_evento=evento[0])}}" method="POST">
+                    <input type="hidden" id="id_evento" name="id_evento" value="{{evento[0]}}">
+                    <button class="btn btn-sm btn-outline-danger m-1">Eliminar</button>
+                  </form>
+                </div>
+                <small class="text-body-secondary">{{evento[3]}} - {{evento[4]}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MODAL AGREGAR EVENTO =========================== -->
+
+<div class="modal fade" id="registrarEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header p-5 pb-0 border-bottom-0 py-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-calendar4-week"
+          viewBox="0 0 16 16">
+          <path
+            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z" />
+          <path
+            d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-2 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+        </svg>
+        <h3 class="mb-0 fs-0 p-5">Registrar Evento</h3>
+        <button type="button" class="btn-close btn-primary" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-5 pt-0">
+        <form action="{{url_for('guardar_evento')}}" method="post">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="nombre_evento" class="form-label">Nombre Evento</label>
+              <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" placeholder="" required>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="fecha_evento" class="form-label">Fecha Evento</label>
+              <input type="date" class="form-control" id="fecha_evento" name="fecha_evento" placeholder="" required>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="lugar_evento" class="form-label">Lugar Evento</label>
+              <input type="text" class="form-control" id="lugar_evento" name="lugar_evento" placeholder="" required>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="modalidad_evento" class="form-label">Modalidad Evento</label>
+              <select class="form-select" id="modalidad_evento" name="modalidad_evento" required>
+                <option value="Virtual">Virtual</option>
+                <option value="Presencial">Presencial</option>
+              </select>
+              <div class="invalid-feedback">
+                Por favor seleccione una modalidad.
+              </div>
+            </div>
+            <button class="w-100 btn btn-success btn-lg" type="submit">Confirmar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- =============================================== -->
+{% endblock %}
