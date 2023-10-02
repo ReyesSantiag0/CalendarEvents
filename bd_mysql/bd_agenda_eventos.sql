@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2023 a las 01:05:07
+-- Tiempo de generación: 02-10-2023 a las 21:29:36
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -41,13 +41,31 @@ CREATE TABLE `eventos` (
 --
 
 INSERT INTO `eventos` (`id_evento`, `nombre_evento`, `fecha_evento`, `lugar_evento`, `modalidad_evento`, `id_usuario`) VALUES
-(22, 'prueba22', '2023-10-09', '2', 'Virtual', 14),
-(27, 'Reunión administrativa', '2023-10-03', 'Barranquilla', 'Virtual', 13),
-(28, 'Reunión administrativa', '2023-12-07', 'Botogá', 'Presencial', 13),
-(29, 'Primera', '2023-10-02', 'Barranquilla', 'Virtual', 13),
-(31, 'Reunión administrativa', '2023-10-04', 'Pasto', 'Virtual', 17),
-(32, 'Reunión programadores', '2023-10-02', 'Barranquilla', 'Presencial', 17);
-
+(38, 'Reunión administrativa', '2023-10-07', 'Barranquilla', 'Virtual', 49),
+(39, 'Reunión Desarrolladores', '2023-10-04', 'Pasto', 'Virtual', 49),
+(40, 'Reunión administrativa', '2023-10-20', 'Bogotá', 'Virtual', 49),
+(41, 'Reunión Desarrolladores', '2023-10-25', 'Bogotá', 'Virtual', 49),
+(42, 'Reunión administrativa', '2023-10-05', 'Barranquilla', 'Virtual', 49),
+(43, 'Asamblea General', '2023-11-01', 'Medellín', 'Presencial', 49),
+(44, 'Reunión administrativa', '2023-10-24', 'Barranquilla', 'Presencial', 49),
+(45, 'Asamblea General', '2023-10-31', 'Pasto', 'Presencial', 49),
+(46, 'Reunión administrativa', '2023-11-02', 'Cali', 'Presencial', 49),
+(47, 'Reunión Desarrolladores', '2023-11-29', 'Cali', 'Presencial', 49),
+(48, 'Reunión administrativa', '2023-11-07', 'Barranquilla', 'Virtual', 49),
+(49, 'Reunión administrativa', '2023-10-31', 'Barranquilla', 'Virtual', 48),
+(50, 'Reunión Desarrolladores', '2023-11-06', 'Pasto', 'Presencial', 48),
+(51, 'Asamblea General', '2023-10-16', 'Bogotá', 'Virtual', 48),
+(52, 'Reunión administrativa', '2023-10-31', 'Bogotá', 'Presencial', 48),
+(53, 'Asamblea General', '2023-11-23', 'Cali', 'Presencial', 48),
+(54, 'Reunión Desarrolladores', '2023-11-02', 'Cundinamarca', 'Virtual', 48),
+(55, 'Asamblea General', '2023-11-08', 'Bogotá', 'Presencial', 48),
+(56, 'Asamblea General', '2023-10-16', 'Pasto', 'Presencial', 48),
+(57, 'Asamblea ingeniería de software', '2023-10-18', 'Pasto', 'Virtual', 48),
+(59, 'Reunión administrativos', '2023-10-18', 'Cali', 'Virtual', 48),
+(60, 'Asamblea General', '2023-10-23', 'Bogotá', 'Presencial', 47),
+(61, 'Reunión Desarrolladores', '2023-10-17', 'Bogotá', 'Presencial', 47),
+(62, 'Asamblea General', '2023-10-22', 'Bogotá', 'Presencial', 47),
+(63, 'Reunión Desarrolladores', '2023-11-14', 'Bogotá', 'Presencial', 47);
 
 -- --------------------------------------------------------
 
@@ -67,11 +85,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `correo_usuario`, `contrasena_usuario`) VALUES
-(13, 'Santiago', 'josecamilreyes9@gmail.com', 'pbkdf2:sha256:600000$Fo11bCY2H6OB7Jq0$baff6e0d5f7560c5b19b16446841d84d83f05cdc1129aaaa64c1e06066272817'),
-(14, '123', 'ejemplo@gmail.com', 'pbkdf2:sha256:600000$ir7gdlclyipMKseU$3ace2963403ce0f30c4fcbef7cc25a53dbf4ce1c5798c937d76050f008cd81d4'),
-(15, '123', 'reyes@gmail.com', 'pbkdf2:sha256:600000$nLomAh8rgk6f0xoZ$60dd21f7a04f4eb2a1cbdaf1752209c04868dfa50bed82228f37ba85d081a13d'),
-(16, '123', 'pope@gmail.com', 'pbkdf2:sha256:600000$eyYq5F4XnJBTLhTw$5855d63ee34ca128be1cee7e57687e16f4147e6b4400546ca65b01d605043586'),
-(17, 'Leidy Lasso', 'leydi@gmail.com', 'pbkdf2:sha256:600000$irLUxGbupnn2oR6w$6550b2a2d4d2a4c6de9b50557eb6e8c4e9ec359cc00a1502c72d19bff7a4b6c8');
+(47, 'Andrés Zambrano', 'zambrano@gmail.com', 'pbkdf2:sha256:600000$VG2YE1UCFrxJspV0$bf6c5db6fa899b2c18494af295ea959d2384aa1389f5b4c56b172b09b9ec41c2'),
+(48, 'Marta Estela', 'marta@gmail.com', 'pbkdf2:sha256:600000$0HLrLrSmHbTUqN7h$fc280c7f83a3fa3aada1dca95d839729cea297b0842ea4ce8f2118adb1f0a952'),
+(49, 'Santiago Reyes', 'josecamilreyes9@gmail.com', 'pbkdf2:sha256:600000$RuZQTrlz2iHabnOk$ff2fc7134fc5c563c4ac81b8055e4cd8651e387069d8d9e10421c2ec06711edc');
 
 --
 -- Índices para tablas volcadas
@@ -98,13 +114,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Restricciones para tablas volcadas

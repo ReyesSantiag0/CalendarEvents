@@ -1,21 +1,15 @@
 import pymysql
 
 def conexion():
-  
-  # return pymysql.connect(
-  #   host='db', 
-  #   user='root',
-  #   password='password',
-  #   database='bd_agenda_eventos'
-  # ) 
-  
-    return pymysql.connect(
-    host='localhost', 
+  # GENERANDO CONEXIÓN
+  return pymysql.connect(
+    host='db', 
     user='root',
-    password='',
+    password='password',
     database='bd_agenda_eventos'
   ) 
   
+# FUNCIÓN REGISTRAR USUARIO
 def registrar_usuario(nombre_usuario, correo_usuario, contrasena_usuario):
     conex = conexion()
     with conex.cursor() as cursor:
@@ -23,6 +17,7 @@ def registrar_usuario(nombre_usuario, correo_usuario, contrasena_usuario):
       conex.commit()
       conex.close()
 
+# FUNCIÓN OBTENER UN USUARIO
 def obtener_usuario(correo_usuario):
   conex = conexion()
   usuario = None
@@ -31,7 +26,8 @@ def obtener_usuario(correo_usuario):
     usuario = cursor.fetchone()
     conex.close()
     return usuario   
-  
+
+# FUNCIÓN GUARDAR EVENTO
 def insertar_evento(nombre_evento, fecha_evento, lugar_evento, modalidad_evento, id_usuario):
   conex = conexion()
   with conex.cursor() as cursor:
@@ -39,6 +35,7 @@ def insertar_evento(nombre_evento, fecha_evento, lugar_evento, modalidad_evento,
     conex.commit()
     conex.close()
 
+# FUNCIÓN LISTAR EVENTO
 def listar_eventos(id_usuario):
   conex = conexion()
   eventos = []
@@ -47,14 +44,16 @@ def listar_eventos(id_usuario):
     eventos = cursor.fetchall()
     conex.close()
     return eventos
-    
+
+# FUNCIÓN ELIMINAR EVENTO    
 def eliminar_evento(id_evento):
   conex = conexion()
   with conex.cursor() as cursor:
     cursor.execute("DELETE FROM eventos WHERE id_evento = %s",(id_evento))
     conex.commit()
     conex.close()
-   
+
+# FUNCIÓN OBTENER UN EVENTO
 def obtener_evento(id_evento):
   conex = conexion()
   evento = None
@@ -64,6 +63,7 @@ def obtener_evento(id_evento):
     conex.close()
     return evento
 
+# FUNCIÓN ACTUALIZAR EVENTO
 def actualizar_evento(id_evento, nombre_evento, fecha_evento, lugar_evento, modalidad_evento, id_usuario):
   conex = conexion()
   with conex.cursor() as cursor:
