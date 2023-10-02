@@ -48,6 +48,7 @@ INSERT INTO `eventos` (`id_evento`, `nombre_evento`, `fecha_evento`, `lugar_even
 (31, 'Reunión administrativa', '2023-10-04', 'Pasto', 'Virtual', 17),
 (32, 'Reunión programadores', '2023-10-02', 'Barranquilla', 'Presencial', 17);
 
+
 -- --------------------------------------------------------
 
 --
