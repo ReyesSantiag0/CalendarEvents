@@ -5,10 +5,25 @@ Login
 
 {% block contenido %}
 
-
 <section>
+
+  {% with mensajes_flash = get_flashed_messages() %}
+  {% if mensajes_flash %}
+  {% for mensaje in mensajes_flash %}
+  <div id="myAlert" class="alert alert-primary alert-dismissible fade show position-fixed top-2 end-0 p-3" role="alert">
+    {{mensaje}}
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <script>
+    setTimeout(function () {
+      document.getElementById("myAlert").style.display = "none";
+    }, 3000);
+  </script>
+
   <div class="container py-5">
-    <form action="{{url_for('login')}}" method="post">
+    <form action="{{url_for('login')}}" method="post" class="py-5">
       <svg xmlns="http://www.w3.org/2000/svg" width="72" height="57" fill="currentColor" class="bi bi-calendar3"
         viewBox="0 0 16 16">
         <path
@@ -21,12 +36,12 @@ Login
 
       <div class="form-floating">
         <input type="email" class="form-control" id="floatingInput" id="correo_usuario" name="correo_usuario"
-          placeholder="Correo Usuario">
+          placeholder="Correo Usuario" required>
         <label for="floatingInput">Correo electrónico</label>
       </div>
       <div class="form-floating">
         <input type="password" class="form-control" id="floatingPassword" id="contrasena_usuario"
-          name="contrasena_usuario" placeholder="Contraseña">
+          name="contrasena_usuario" placeholder="Contraseña" required>
         <label for="floatingPassword">Contraseña</label>
       </div>
       <button class="btn btn-primary w-100 py-2" type="submit">Iniciar sesión</button>
@@ -36,16 +51,6 @@ Login
       </div>
     </form>
   </div>
-
-
-  {% with mensajes_flash = get_flashed_messages() %}
-
-  {% if mensajes_flash %}
-  {% for mensaje in mensajes_flash %}
-  <li>{{mensaje}}</li>
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
 </section>
 
 {% endblock %}

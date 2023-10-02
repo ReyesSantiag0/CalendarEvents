@@ -5,17 +5,9 @@ import secrets
 import base_datos
 
 app = Flask(__name__)
-
 secret_key = secrets.token_hex(24)
 app.secret_key = secret_key
 
-# @app.before_request
-# def antes_de_acceso():
-#   ruta = request.path
-#   if not 'usuario' in session and ruta != '/inicio_sesion' and ruta != '/login' and ruta != '/salir' and ruta != '/registro_usuario' and ruta != "/registrar":
-#     flash('Inicia sesión para continuar')
-#     return redirect('/inicio_sesion')
-  
 @app.route('/')
 @app.route('/inicio_sesion')
 def inicio_sesion():
@@ -56,7 +48,7 @@ def registrar_usuario():
     contrasena_usuario = genph(contrasena_usuario)
     try:
       base_datos.registrar_usuario(nombre_usuario, correo_usuario, contrasena_usuario)
-      flash('Usuario registrado')
+      flash('Usuario registrado exitosamente')
     except Exception as e:
       flash('Error al registrar usuario')
     finally:
@@ -76,6 +68,7 @@ def guardar_evento():
   usuario = base_datos.obtener_usuario(correo_usuario)
   id_usuario = usuario[0]
   base_datos.insertar_evento(nombre_evento, fecha_evento, lugar_evento, modalidad_evento,id_usuario)
+  flash('Evento registrado')
   return redirect('/eventos')
 
 @app.route('/eventos')
@@ -89,6 +82,7 @@ def eventos():
 @app.route('/eliminar_evento', methods=['POST'])
 def eliminar_evento():
   base_datos.eliminar_evento(request.form['id_evento'])
+  flash('Evento eliminado')
   return redirect('/eventos')
 
 @app.route('/editar_evento/<int:id_evento>')
@@ -107,7 +101,14 @@ def actualizar_evento():
   usuario = base_datos.obtener_usuario(correo_usuario)
   id_usuario = usuario[0]
   base_datos.actualizar_evento(id_evento, nombre_evento, fecha_evento, lugar_evento, modalidad_evento, id_usuario)
+  flash('Evento actualizado exitosamente')
   return redirect('/eventos')
 
+
+# PÁGINA NO ENCONTRADA ERROR 404
+def pagina_no_encontrada(error):
+  return render_template('control_errores/control_errores.html'), 404
+
 if __name__ == '__main__':
+  app.register_error_handler(404, pagina_no_encontrada)
   app.run(debug=True)

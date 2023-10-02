@@ -1,12 +1,20 @@
 import pymysql
 
 def conexion():
-  return pymysql.connect(
-    host='localhost',
+  
+  # return pymysql.connect(
+  #   host='db', 
+  #   user='root',
+  #   password='password',
+  #   database='bd_agenda_eventos'
+  # ) 
+  
+    return pymysql.connect(
+    host='localhost', 
     user='root',
     password='',
     database='bd_agenda_eventos'
-  )
+  ) 
   
 def registrar_usuario(nombre_usuario, correo_usuario, contrasena_usuario):
     conex = conexion()
